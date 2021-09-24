@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
-
+import React, { useState } from "react";
+import Formulario from './Components/formulario';
+import Lista from './Components/lista';
 function App() {
+
+  const [todasLasTareas, setTodasLasTareas] = useState([])
+
+  function addToDo (toDo){
+    setTodasLasTareas([...todasLasTareas,toDo])
+  }
+
+  function deleteToDo(id) {
+    setTodasLasTareas(todasLasTareas.filter((tarea) => tarea.id !== id))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>toDo list</h1>
+    <Formulario addToDo={addToDo}/>
+    <Lista todasLasTareas={todasLasTareas} deleteToDo={deleteToDo}/>
     </div>
   );
 }
